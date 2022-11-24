@@ -12,11 +12,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/register', 'LoginController@register');
+Route::post('/register', 'LoginController@register_save');
 
-Route::get('/', function () {
-    return view('layouts.master');
+Route::get('/login', 'LoginController@login')->name('login');
+Route::post('/login', 'LoginController@simpan_login');
+
+Route::group(['middleware' => 'login'], function () { 
+    Route::get('/', function () {
+        return view('layouts.master');
+    });   
 });
 
 Route::get('/welcome', function () {
     return view('welcome');
 });
+
