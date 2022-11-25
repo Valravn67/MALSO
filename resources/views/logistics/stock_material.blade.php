@@ -1,8 +1,8 @@
 @extends('layout')
 @section('title', 'Stock Material')
 
-<link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
-<link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+<link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
 @section('content')
 <section class="content">
@@ -50,8 +50,8 @@
   </div>
 </section>
 
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<script src="../../plugins/select2/js/select2.full.min.js"></script>
+<script src="/plugins/jquery/jquery.min.js"></script>
+<script src="/plugins/select2/js/select2.full.min.js"></script>
 <script>
     $('.select2bs4').select2({
       theme: 'bootstrap4'

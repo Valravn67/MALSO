@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 date_default_timezone_set("Asia/Makassar");
 

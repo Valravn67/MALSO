@@ -20,7 +20,7 @@ Route::post('/login', 'LoginController@simpan_login');
 
 Route::group(['middleware' => 'login'], function () { 
     Route::get('/', function () {
-        return view('layouts.master');
+        return view('layout');
     });
 
     Route::get('/logistics/stock_material', 'LogisticsController@stock_material');

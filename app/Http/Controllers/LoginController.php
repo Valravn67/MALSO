@@ -13,7 +13,7 @@ class LoginController extends Controller
 {
     
     public function register(){
-        return view('layouts.register');
+        return view('auth.register');
     }
     public function register_save(Request $req)
     {
@@ -29,7 +29,7 @@ class LoginController extends Controller
             return redirect('/login');
     }
     public function login(){
-        return view('layouts.login');
+        return view('auth.login');
     }
 
     public function simpan_login(request $req){
