@@ -21,7 +21,11 @@ Route::post('/login', 'LoginController@simpan_login');
 Route::group(['middleware' => 'login'], function () { 
     Route::get('/', function () {
         return view('layouts.master');
-    });   
+    });
+
+    Route::get('/logistics/stock_material', 'LogisticsController@stock_material');
+    Route::post('/logistics/stock_material', 'LogisticsController@save_stock_material');
+    Route::get('/logistics/out_material', 'LogisticsController@out_material');
 });
 
 Route::get('/welcome', function () {
