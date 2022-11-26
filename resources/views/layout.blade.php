@@ -3,21 +3,27 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>@yield('title')</title>
+    <title>MALSO | @yield('title')</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="{{ asset('/plugins/fontawesome-free/css/all.min.css') }}" />
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
     <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="/dist/css/adminlte.min.css" />
+    <link rel="stylesheet" href="{{ asset('/dist/css/adminlte.min.css') }}" />
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
     <!-- DataTables -->
-    <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" />
-    <link rel="stylesheet" href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" />
+    <link rel="stylesheet" href="{{ asset('/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}" />
+    @yield('css')
+
+    @if (Session::has('alerts'))
+    <link rel="stylesheet" href="{{ asset('/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/plugins/toastr/toastr.min.css') }}">
+    @endif
   </head>
 
   <body class="hold-transition sidebar-mini">
@@ -36,8 +42,8 @@
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="/index3.html" class="brand-link">
-          <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 0.8;" />
+        <a href="/" class="brand-link">
+          <img src="/dist/img/poliban.png" alt="telkomakses-logo" class="brand-image elevation-3" style="opacity: 0.8;" />
           <span class="brand-text font-weight-light">MALSO</span>
         </a>
 
@@ -56,13 +62,11 @@
           <!-- Sidebar Menu -->
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-              <!-- Add icons to the links using the .nav-icon class
-                   with font-awesome or any other icon font library -->
               <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                <a href="javascript:void(0)" class="nav-link">
+                  <i class="nav-icon fas fa-edit"></i>
                   <p>
-                    Logistick
+                    Input Data
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
@@ -77,6 +81,52 @@
                     <a href="/logistics/out_material" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Out Materials</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item has-treeview">
+                <a href="javascript:void(0)" class="nav-link">
+                  <i class="nav-icon fas fa-warehouse"></i>
+                  <p>
+                    Report
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/report/stock_material" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Stock Materials</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/report/out_material" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Out Materials</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item has-treeview">
+                <a href="javascript:void(0)" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>
+                    Super Admin
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/admin/warehouse_staff_list" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Warehouse Staff List</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/admin/technician_list" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Technician List</p>
                     </a>
                   </li>
                 </ul>
@@ -104,7 +154,11 @@
             </div>
           </div>
         </section>
+        <section class="content">
+          <div class="container-fluid">
         @yield('content')
+          </div>
+        </section>
       </div>
       <!-- /.content-wrapper -->
       <footer class="main-footer">
@@ -121,44 +175,49 @@
     <!-- ./wrapper -->
 
     <!-- jQuery -->
-    <script src="/plugins/jquery/jquery.min.js"></script>
+    <script src="{{ asset('/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
-    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
-    <script src="/dist/js/adminlte.min.js"></script>
+    <script src="{{ asset('/dist/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="/dist/js/demo.js"></script>
-
+    <script src="{{ asset('/dist/js/demo.js') }}"></script>
     <!-- jQuery -->
-    <script src="/plugins/jquery/jquery.min.js"></script>
+    <script src="{{ asset('/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
-    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- DataTables -->
-    <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="{{ asset('/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
     <!-- AdminLTE App -->
-    <script src="/dist/js/adminlte.min.js"></script>
+    <script src="{{ asset('/dist/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="/dist/js/demo.js"></script>
+    <script src="{{ asset('/dist/js/demo.js') }}"></script>
     <!-- page script -->
-    <script>
-      $(function () {
-        $("#example1").DataTable({
-          responsive: true,
-          autoWidth: false,
-        });
-        $("#example2").DataTable({
-          paging: true,
-          lengthChange: false,
-          searching: false,
-          ordering: true,
-          info: true,
-          autoWidth: false,
-          responsive: true,
-        });
-      });
-    </script>
+    @if (Session::has('alerts'))
+    <script src="{{ asset('/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('/plugins/toastr/toastr.min.js') }}"></script>
+      @foreach(Session::get('alerts') as $alert)
+      <script>
+          $(function() {
+            var message = {!! json_encode($alert) !!}
+              console.log(message)
+              var Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 3000
+              });
+              Toast.fire({
+                icon: message['type'],
+                title: message['text']
+              })
+          });
+      </script>
+      @endforeach
+    @endif
+    @yield('js')
   </body>
 </html>

@@ -23,12 +23,16 @@ Route::group(['middleware' => 'login'], function () {
         return view('layout');
     });
 
+    // input data
     Route::get('/logistics/stock_material', 'LogisticsController@stock_material');
     Route::post('/logistics/stock_material', 'LogisticsController@save_stock_material');
     Route::get('/logistics/out_material', 'LogisticsController@out_material');
-});
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+    // report
+    Route::get('/report/stock_material', 'LogisticsController@report_stock_material');
+    Route::get('/report/out_material', 'LogisticsController@report_out_material');
 
+    // super admin
+    Route::get('/admin/warehouse_staff_list', 'AdminController@warehouse_staff_list');
+    Route::get('/admin/technician_list', 'AdminController@technician_list');
+});
