@@ -3,6 +3,8 @@
 namespace App\Model;
  
 use Illuminate\Database\Eloquent\Model;
+
+date_default_timezone_set("Asia/Makassar");
  
 class LogisticsModel extends Model
 {

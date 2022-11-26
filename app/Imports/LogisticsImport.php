@@ -5,6 +5,8 @@ namespace App\Imports;
 use App\Model\LogisticsModel;
 use Maatwebsite\Excel\Concerns\ToModel;
 
+date_default_timezone_set("Asia/Makassar");
+
 class LogisticsImport implements ToModel
 {
     /**

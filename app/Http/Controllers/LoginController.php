@@ -9,12 +9,16 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+date_default_timezone_set("Asia/Makassar");
+
 class LoginController extends Controller
 {
     
-    public function register(){
+    public function register()
+    {
         return view('auth.register');
     }
+
     public function register_save(Request $req)
     {
         $username = $req->input('username');
@@ -26,13 +30,17 @@ class LoginController extends Controller
         }
 
         LoginModel::register_save($req);
-            return redirect('/login');
+        
+        return redirect('/login');
     }
-    public function login(){
+
+    public function login()
+    {
         return view('auth.login');
     }
 
-    public function simpan_login(request $req){
+    public function simpan_login(request $req)
+    {
         $username = $req->input('username');
         $password = $req->input('password');
 
@@ -52,11 +60,13 @@ class LoginController extends Controller
         }
     }
 
-    private function generateRememberToken($username){
+    private function generateRememberToken($username)
+    {
         return md5($username . microtime());
     }
 
-    private function ensureLocalUserHasRememberToken($localUser){
+    private function ensureLocalUserHasRememberToken($localUser)
+    {
         $token = $localUser->token;
 
         if (!$localUser->token)
@@ -73,15 +83,18 @@ class LoginController extends Controller
         return $token;
     }
 
-    private function successResponse($rememberToken){
-        if (Session::has('auth-originalUrl')) {
+    private function successResponse($rememberToken)
+    {
+        if (Session::has('auth-originalUrl'))
+        {
             $url = Session::pull('auth-originalUrl');
         } else {
             $url = '/';
         }
 
         $response = redirect($url);
-        if ($rememberToken){
+        if ($rememberToken)
+        {
             $response->withCookie(cookie()->forever('presistent-token', $rememberToken));
         }
 

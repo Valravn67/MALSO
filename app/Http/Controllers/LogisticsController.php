@@ -14,7 +14,7 @@ class LogisticsController extends Controller
 {
     public function stock_material()
     {
-        $get_warehouse = DB::table('warehouse')->select('id_warehouse as id', 'warehouse_name as text')->get();
+        $get_warehouse = DB::table('gudang')->select('id_warehouse as id', 'warehouse_name as text')->get();
         
         return view('logistics.stock_material', compact('get_warehouse'));
     }
