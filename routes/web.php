@@ -30,7 +30,7 @@ Route::group(['middleware' => 'login'], function () {
 
     // report
     Route::get('/report/stock_material', 'LogisticsController@report_stock_material');
-    Route::get('/report/out_material', 'LogisticsController@report_out_material');
+    Route::get('/report/out_material', 'LogisticsController@out_material');
 
     // super admin
     Route::get('/admin/warehouse_staff_list', 'AdminController@warehouse_staff_list');

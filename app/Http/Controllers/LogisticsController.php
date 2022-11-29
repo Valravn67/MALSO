@@ -41,7 +41,11 @@ class LogisticsController extends Controller
 
     public function report_stock_material()
     {
-        return view('logistics.report_stock_material');
+        $data = DB::table('gudang')->get();
+        // $data = DB::table('stock_materials')->where('id','=','1')->get();
+        
+        return view('report.stock_material', compact('data'));
+    
     }
 
     public function report_out_material()

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Log in</title>
+  <title>MALSO | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -22,7 +22,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="/index2.html"><b>Admin</b>LTE</a>
+    <b>Telkom Akses</b>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -65,10 +65,6 @@
       </form>
 
       <!-- /.social-auth-links -->
-
-      <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
-      </p>
       <p class="mb-0">
         <a href="/register" class="text-center">Register </a>
       </p>
