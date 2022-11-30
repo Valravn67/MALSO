@@ -18,48 +18,16 @@
             <thead>
                 <tr>
                     <th>Warehouse Name</th>
-                    <th>AC-OF-SM-1B</th>
-                    <th>AD-SC</th>
-                    <th>CLAMP-HOOK</th>
-                    <th>Heatshrink</th>
-                    <th>KLEM-RING-5-LUBANG</th>
-                    <th>ODP-CA-8</th>
-                    <th>ODP-SOLID-8-L</th>
-                    <th>OTP-FTTH-1</th>
-                    <th>PC-SC-SC-10</th>
-                    <th>PC-SC-SC-15</th>
-                    <th>PC-SC-SC-20</th>
-                    <th>PC-SC-SC-30</th>
-                    <th>PIGTAIL-SC</th>
-                    <th>PREKSO-INTRA-15-RS</th>
-                    <th>PREKSO-INTRA-20-RS</th>
-                    <th>PROTECTION-SLEEVE</th>
-                    <th>PS-1-16-ODP-PB</th>
-                    <th>PS-1-2</th>
-                    <th>PS-1-4-ODC-288</th>
-                    <th>PS-1-8-ODP-PB/PD</th>
-                    <th>RJ45-5</th>
-                    <th>RJ45-6</th>
-                    <th>RS-IN-SC-1</th>
-                    <th>S-CLAMP-SPRINER</th>
-                    <th>SC-OF-SM-12</th>
-                    <th>SC-OF-SM-144</th>
-                    <th>SC-OF-SM-24</th>
-                    <th>SC-OF-SM-288</th>
-                    <th>SOC-ILS</th>
-                    <th>SOC-SUM</th>
-                    <th>TC-2-160</th>
-                    <th>UTP-C6</th>
-                    <th>PRECON-1C-50-NOAC</th>
-                    <th>Created At</th>
-                    <th>Update At</th>
+                    @foreach($data as $value)  
+                    <th>{{ $value->designator_type }}</th>
+                    @endforeach
                 </tr>
             </thead>
              <tbody>
-                @foreach ($data as $key => $value)
+                @foreach ($data as $value)
                 <tr>
-                    <td>{{ $value->warehouse_name }}</td>
-                    {{-- <td>{{ $value->id }}</td> --}}
+                    <th>{{ $value->warehouse_name }}</th>
+                    <th>{{ $value->qty}}</th>
                 </tr> 
                 @endforeach
             </tbody>

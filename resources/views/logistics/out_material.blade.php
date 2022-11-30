@@ -4,6 +4,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('/plugins/select2/css/select2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('/css/plusmin.css') }}">
 @endsection
 
 @section('content')
@@ -58,7 +59,11 @@
                 </button>
               </div>
               <div class="modal-body">
-                <p>One fine body&hellip;</p>
+                <div class="number">
+                  <span class="minus">-</span>
+                  <input type="text" value="1"/>
+                  <span class="plus">+</span>
+                </div>
               </div>
               <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -82,6 +87,24 @@
 
 @section('js')
 <script src="{{ asset('/plugins/select2/js/select2.full.min.js') }}"></script>
+<script>	
+  $(document).ready(function() {
+    $('.minus').click(function () {
+      var $input = $(this).parent().find('input');
+      var count = parseInt($input.val()) - 1;
+      count = count < 1 ? 1 : count;
+      $input.val(count);
+      $input.change();
+      return false;
+    });
+    $('.plus').click(function () {
+      var $input = $(this).parent().find('input');
+      $input.val(parseInt($input.val()) + 1);
+      $input.change();
+      return false;
+    });
+  }); 
+</script>
 <script>
   $(function() {
     $('.select2bs4').select2({
