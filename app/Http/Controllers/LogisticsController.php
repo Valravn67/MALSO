@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Imports\LogisticsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
+use App\Model\LogisticsModel;
 
 date_default_timezone_set("Asia/Makassar");
 
@@ -36,17 +37,20 @@ class LogisticsController extends Controller
 
     public function out_material()
     {
-        return view('logistics.out_material');
+        $get_warehouse = DB::table('gudang')->select('id_warehouse as id', 'warehouse_name as text')->get();
+        $get_technician = DB::table('technician')->select('nik as id', 'name as text')->get();
+
+        return view('logistics.out_material', compact('get_warehouse', 'get_technician'));
+    }
+
+    public function call_out_material(Request $req)
+    {
+        return \Response::json(LogisticsModel::call_out_material($req->id));
     }
 
     public function report_stock_material()
     {
-        
-        // $warehouse = DB::table('gudang')->get();
-        $data = DB::table('stock_materials')
-                    ->join('gudang', 'stock_materials.warehouse_id', '=', 'gudang.id_warehouse')
-                    ->select('gudang.warehouse_name', 'stock_materials.qty', 'stock_materials.designator_type','gudang.id_warehouse')
-                    ->get();
+        $data = LogisticsModel::report_stock_material();
 
         return view('report.stock_material', compact('data'));
     

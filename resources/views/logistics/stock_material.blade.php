@@ -23,7 +23,7 @@
   <div class="card-body">
     <div class="col-md-12">
       <form method="post" enctype="multipart/form-data" autocomplete="off">
-      {{ csrf_field() }}
+        {{ csrf_field() }}
         <div class="form-group">
           <label for="warehouse_name">Warehouse Name *</label>
             <select class="form-control select2bs4" style="width: 100%;" name="warehouse_id" required>

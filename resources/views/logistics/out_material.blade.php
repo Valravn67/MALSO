@@ -4,7 +4,6 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('/plugins/select2/css/select2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('/css/plusmin.css') }}">
 @endsection
 
 @section('content')
@@ -27,54 +26,45 @@
       {{ csrf_field() }}
         <div class="form-group">
           <label for="warehouse_name">Warehouse Name </label>
-            <select class="form-control select2bs4" style="width: 100%;" name="warehouse_id" required>
+            <select class="form-control select2bs4" style="width: 100%;" name="warehouse_id" id="warehouse_id" required>
                 <option value="" selected disabled>Select a Warehouse!</option>
-                {{-- @foreach ($get_warehouse as $warehouse)
+                @foreach ($get_warehouse as $warehouse)
                 <option value="{{ $warehouse->id }}">{{ $warehouse->text }}</option>
-                @endforeach --}}
+                @endforeach
             </select>
         </div>
         <div class="form-group">
-          <label for="nik_technician">Nik Technician</label>
-            <select class="form-control select2bs4" style="width: 100%;" name="warehouse_id" required>
+          <label for="nik_technician">NIK Technician</label>
+            <select class="form-control select2bs4" style="width: 100%;" name="nik_technician" required>
                 <option value="" selected disabled>Select NIK Technician</option>
-                {{-- @foreach ($get_warehouse as $warehouse)
-                <option value="{{ $warehouse->id }}">{{ $warehouse->text }}</option>
-                @endforeach --}}
+                @foreach ($get_technician as $technician)
+                <option value="{{ $technician->id }}">{{ $technician->text }}</option>
+                @endforeach
             </select>
         </div>
         <div class="form-group">
-          <label for="select_material">Select Materials</label><br>
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
-                    Launch Default Modal
-            </button>
-        </div>
-        <div class="modal fade" id="modal-default">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">Default Modal</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="number">
-                  <span class="minus">-</span>
-                  <input type="text" value="1"/>
-                  <span class="plus">+</span>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#input-material">Input Material's</button>
+            <div class="modal fade" id="input-material">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">List Material's</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
                 </div>
               </div>
-              <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
             </div>
-            <!-- /.modal-content -->
-          </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
+
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#input-nte">Input NTE's</button>
+        </div>
         <div class="form-group" style="text-align: right;">
           <br />
           <button type="submit" class="btn btn-primary">Upload!</button>
@@ -87,28 +77,26 @@
 
 @section('js')
 <script src="{{ asset('/plugins/select2/js/select2.full.min.js') }}"></script>
-<script>	
-  $(document).ready(function() {
-    $('.minus').click(function () {
-      var $input = $(this).parent().find('input');
-      var count = parseInt($input.val()) - 1;
-      count = count < 1 ? 1 : count;
-      $input.val(count);
-      $input.change();
-      return false;
-    });
-    $('.plus').click(function () {
-      var $input = $(this).parent().find('input');
-      $input.val(parseInt($input.val()) + 1);
-      $input.change();
-      return false;
-    });
-  }); 
-</script>
 <script>
   $(function() {
     $('.select2bs4').select2({
       theme: 'bootstrap4'
+    })
+
+    $('#input-material').on('click', function(e) {
+      $.ajax({
+      url: `/ajax/call_out_material`,
+      method: 'GET',
+      data: {id: $('#warehouse_id').val()},
+      dataType: 'json',
+      }).done(function (e) {
+        console.log(e)
+        var html = "";
+        $.each(e, function(key, value) {
+          html += `<div class="form-group row"><label for="${value.designator_type}" class="col-sm-2 col-form-label">${value.designator_type}</label><div class="col-sm-10"><input type="number" class="form-control" id="${value.designator_type}"></div></div>`
+        })
+        $('.modal-body').html(html)
+      })
     })
   });
 </script>

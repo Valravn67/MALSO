@@ -12,27 +12,27 @@
     <div class="card-header">
         <h3 class="card-title">List</h3>
     </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table id="dataTableMaterial" class="table table-bordered table-striped text-nowrap" style="text-align: center;">
+    <div class="card-body table-responsive">
+        <table id="dataStockMaterials" class="table table-bordered text-nowrap" style="text-align: center;">
             <thead>
                 <tr>
-                    <th>Warehouse Name</th>
-                    @foreach($data as $value)  
-                    <th>{{ $value->designator_type }}</th>
-                    @endforeach
+                    <th>DESIGNATOR TYPE</th>
+                    <th>WAREHOUSE</th>
+                    <th>DESIGNATOR</th>
+                    <th>QTY</th>
                 </tr>
             </thead>
-             <tbody>
-                @foreach ($data as $value)
-                <tr>
-                    <th>{{ $value->warehouse_name }}</th>
-                    <th>{{ $value->qty}}</th>
-                </tr> 
+            <tbody>
+                @foreach ($data as $key => $value)
+                    <tr>
+                        <td style="vertical-align: middle">{{ $value->designator_type }}</td>
+                        <td style="vertical-align: middle">{{ $value->warehouse_name }}</td>
+                        <td style="vertical-align: middle">{{ $value->designator }}</td>
+                        <td style="vertical-align: middle">{{ $value->qty }}</td>
+                    </tr>
                 @endforeach
             </tbody>
-            </table>
-        </div>
+        </table>
     </div>
 </div>
 @endsection
@@ -51,17 +51,43 @@
 <script src="{{ asset('/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script>
-    $(function () {
-      $("#dataTableWarehouseList")
-        .DataTable({
-          responsive: true,
-          lengthChange: false,
-          autoWidth: false,
-          buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
-        })
-        .buttons()
-        .container()
-        .appendTo("#dataTableWarehouseList_wrapper .col-md-6:eq(0)");
+   $(document).ready(function () {
+    var groupColumn = 1;
+    var table = $('#dataStockMaterials').DataTable({
+        responsive: true,
+        lengthChange: false,
+        autoWidth: false,
+        columnDefs: [{ visible: false, targets: groupColumn }],
+        order: [[groupColumn, 'asc']],
+        displayLength: 25,
+        drawCallback: function (settings) {
+            var api = this.api();
+            var rows = api.rows({ page: 'current' }).nodes();
+            var last = null;
+ 
+            api
+                .column(groupColumn, { page: 'current' })
+                .data()
+                .each(function (group, i) {
+                    if (last !== group) {
+                        $(rows)
+                            .eq(i)
+                            .before('<tr class="group"><td colspan="2">' + group + '</td></tr>');
+ 
+                        last = group;
+                    }
+                });
+        },
     });
+ 
+    $('#dataStockMaterials tbody').on('click', 'tr.group', function () {
+        var currentOrder = table.order()[0];
+        if (currentOrder[0] === groupColumn && currentOrder[1] === 'asc') {
+            table.order([groupColumn, 'desc']).draw();
+        } else {
+            table.order([groupColumn, 'asc']).draw();
+        }
+    });
+});
 </script>
 @endsection
