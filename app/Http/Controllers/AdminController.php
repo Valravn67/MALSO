@@ -15,4 +15,11 @@ class AdminController extends Controller
 
         return view('admin.warehouse_staff_list', compact('data'));
     }
+
+    public function technician_list()
+    {
+        $data = DB::table('technician')->get();
+
+        return view('admin.technician_list', compact('data'));
+    }
 }
