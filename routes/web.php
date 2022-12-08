@@ -35,8 +35,12 @@ Route::group(['middleware' => 'login'], function () {
     // super admin
     Route::get('/admin/warehouse_staff_list', 'AdminController@warehouse_staff_list');
     Route::get('/admin/technician_list', 'AdminController@technician_list');
+    Route::post('/admin/technician_list', 'AdminController@save_technician');
+    Route::post('/admin/update_teknisi', 'AdminController@update_teknisi');
+
 
 
     // ajax
     Route::get('/ajax/call_out_material', 'LogisticsController@call_out_material');
+    Route::get('/ajax/get_teknisi', 'AdminController@get_teknisi');
 });
