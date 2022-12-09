@@ -34,6 +34,9 @@ Route::group(['middleware' => 'login'], function () {
 
     // super admin
     Route::get('/admin/warehouse_staff_list', 'AdminController@warehouse_staff_list');
+    Route::post('/admin/warehouse_staff_list', 'AdminController@save_staff');
+    Route::post('/admin/update_warehouse_staff', 'AdminController@update_warehouse_staff');
+        // technician
     Route::get('/admin/technician_list', 'AdminController@technician_list');
     Route::post('/admin/technician_list', 'AdminController@save_technician');
     Route::post('/admin/update_teknisi', 'AdminController@update_teknisi');
@@ -43,4 +46,6 @@ Route::group(['middleware' => 'login'], function () {
     // ajax
     Route::get('/ajax/call_out_material', 'LogisticsController@call_out_material');
     Route::get('/ajax/get_teknisi', 'AdminController@get_teknisi');
+    Route::get('/ajax/get_warehouse_staff', 'AdminController@get_warehouse_staff');
+    
 });
