@@ -2,8 +2,6 @@
 @section('title', 'Warehouse Staff List')
 
 @section('css')
-
-<link rel="stylesheet" href="{{ asset('/plugins/toastr/toastr.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}" />
@@ -15,7 +13,10 @@
         <h3 class="card-title">List</h3>
     </div>
     <div class="card-body">
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-add">Add Staff</button>
+        
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-add"><i class="far fa-edit nav-icon"></i> Add</button>
+        <br /><br />
+        
         <table id="dataTableWarehouseList" class="table table-bordered table-striped text-nowrap" style="text-align: center;">
             <thead>
             <tr>
@@ -43,99 +44,95 @@
     {{-- Modal-Content Add Staff --}}
     <div class="modal fade" id="modal-add">
         <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Add Staff</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>  
-            </div>
-            <div class="modal-body">
-            <form method="post" autocomplete="off">
-                {{ csrf_field() }}
-                <div class="form-group">
-                    <label for="id">Warehouse ID</label>
-                    <input type="text" class="form-control" id="idwh" name="id_warehouse" placeholder="Input Warehouse ID">
-                </div>
-                <div class="form-group">
-                    <label for="name">Warehouse Name</label>
-                    <input type="text" class="form-control" id="whname" name="warehouse_name" placeholder="Input Warehouse Name">
-                </div>
-                <div class="form-group">
-                    <label for="name">Staff NIK 1</label>
-                    <input type="text" class="form-control" id="staffnik1_add" name="nik_staff_1" placeholder="Input Staff NIK 1">
-                </div>
-                <div class="form-group">
-                    <label for="name">Staff Name 1</label>
-                    <input type="text" class="form-control" id="staffname1_add" name="name_staff_1" placeholder="Input Staff Name 1">
-                </div>
-                <div class="form-group">
-                    <label for="name">Staff NIK 2</label>
-                    <input type="text" class="form-control" id="staffnik2_add" name="nik_staff_2" placeholder="Input Staff NIK 2">
-                </div>
-                <div class="form-group">
-                    <label for="name">Staff Name 2</label>
-                    <input type="text" class="form-control" id="staffname2_add" name="name_staff_2" placeholder="Input Staff Name 2">
-                </div>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </form>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      {{-- Modal-Content Edit Staff --}}
-        <div class="modal fade" id="modal-edit">
-            <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h4 class="modal-title">Edit Data Staff</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h4 class="modal-title">Add Staff</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                </button>
+                    </button>  
                 </div>
-                <div class="modal-body">
-                <form method="post" action="/admin/update_warehouse_staff" autocomplete="off">
-                {{ csrf_field() }}
-                <input type="hidden" id="id_edit" name="id">
-                <div class="form-group">
-                    <label for="id">Warehouse ID</label>
-                    <input type="text" class="form-control" id="idwh_edit" name="id_warehouse" placeholder="Input Warehouse ID">
-                </div>
-                <div class="form-group">
-                    <label for="name">Warehouse Name</label>
-                    <input type="text" class="form-control" id="whname_edit" name="warehouse_name" placeholder="Input Warehouse Name">
-                </div>
-                <div class="form-group">
-                    <label for="name">Staff NIK 1</label>
-                    <input type="text" class="form-control" id="staffnik1_edit" name="nik_staff_1" placeholder="Input Staff NIK 1">
-                </div>
-                <div class="form-group">
-                    <label for="name">Staff Name 1</label>
-                    <input type="text" class="form-control" id="staffname1_edit" name="name_staff_1" placeholder="Input Staff Name 1">
-                </div>
-                <div class="form-group">
-                    <label for="name">Staff NIK 2</label>
-                    <input type="text" class="form-control" id="staffnik2_edit" name="nik_staff_2" placeholder="Input Staff NIK 2">
-                </div>
-                <div class="form-group">
-                    <label for="name">Staff Name 2</label>
-                    <input type="text" class="form-control" id="staffname2_edit" name="name_staff_2" placeholder="Input Staff Name 2">
-                </div>
-                <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
+                <form method="post" autocomplete="off">
+                    
+                    {{ csrf_field() }}
+                    <input type="hidden" name="is_save" value="insert">
+                    <input type="hidden" name="id" value="null">
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Warehouse Name</label>
+                            <input type="text" class="form-control" id="whname" name="warehouse_name" placeholder="Input Warehouse Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Staff NIK 1</label>
+                            <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" id="staffnik1_add" name="nik_staff_1" placeholder="Input Staff NIK 1">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Staff Name 1</label>
+                            <input type="text" class="form-control" id="staffname1_add" name="name_staff_1" placeholder="Input Staff Name 1">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Staff NIK 2</label>
+                            <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" id="staffnik2_add" name="nik_staff_2" placeholder="Input Staff NIK 2">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Staff Name 2</label>
+                            <input type="text" class="form-control" id="staffname2_add" name="name_staff_2" placeholder="Input Staff Name 2">
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Insert</button>
+                    </div>
+                </form>
             </div>
-            </form>
-            <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
         </div>
+    </div>
+      {{-- Modal-Content Edit Staff --}}
+    <div class="modal fade" id="modal-edit">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Data Staff</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" autocomplete="off">
+                    
+                    {{ csrf_field() }}
+                    <input type="hidden" name="is_save" value="update">
+                    <input type="hidden" id="id_edit" name="id">
+                    
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Warehouse Name</label>
+                            <input type="text" class="form-control" id="whname_edit" name="warehouse_name" placeholder="Input Warehouse Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Staff NIK 1</label>
+                            <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" id="staffnik1_edit" name="nik_staff_1" placeholder="Input Staff NIK 1">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Staff Name 1</label>
+                            <input type="text" class="form-control" id="staffname1_edit" name="name_staff_1" placeholder="Input Staff Name 1">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Staff NIK 2</label>
+                            <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" id="staffnik2_edit" name="nik_staff_2" placeholder="Input Staff NIK 2">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Staff Name 2</label>
+                            <input type="text" class="form-control" id="staffname2_edit" name="name_staff_2" placeholder="Input Staff Name 2">
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('js')

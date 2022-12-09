@@ -57,6 +57,7 @@
         responsive: true,
         lengthChange: false,
         autoWidth: false,
+        buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
         columnDefs: [{ visible: false, targets: groupColumn }],
         order: [[groupColumn, 'asc']],
         displayLength: 25,
@@ -78,7 +79,10 @@
                     }
                 });
         },
-    });
+    })
+    .buttons()
+    .container()
+    .appendTo("#dataStockMaterials .col-md-6:eq(0)");
  
     $('#dataStockMaterials tbody').on('click', 'tr.group', function () {
         var currentOrder = table.order()[0];
