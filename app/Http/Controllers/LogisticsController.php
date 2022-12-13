@@ -58,6 +58,6 @@ class LogisticsController extends Controller
 
     public function report_out_material()
     {
-        return view('logistics.report_out_material');
+        return view('report.out_material');
     }
 }
