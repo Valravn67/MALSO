@@ -4,6 +4,8 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('/plugins/select2/css/select2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('/css/view.css') }}">
+
 @endsection
 
 @section('content')
@@ -43,17 +45,29 @@
             </select>
         </div>
         <div class="form-group">
+          <label for="rfc">No RFC</label>
+           <input type="text" class="form-control" id="rfc" name="rfc" placeholder="Input No. RFC">
+        </div>
+        <div class="form-group">
+          <label for="note">Note</label>
+          <textarea class="form-control" rows="4" placeholder="Give ur Note, Here!" id="note" name="note"></textarea>
+        </div>
+
+        {{-- modal input material --}}
+        <div class="form-group">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#input-material">Input Material's</button>
             <div class="modal fade" id="input-material">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h4 class="modal-title">List Material's</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
+                  
                   <div class="modal-body">
+                  {{-- ajax jquery input material --}}
                   </div>
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -93,11 +107,37 @@
         console.log(e)
         var html = "";
         $.each(e, function(key, value) {
-          html += `<div class="form-group row"><label for="${value.designator_type}" class="col-sm-2 col-form-label">${value.designator_type}</label><div class="col-sm-10"><input type="number" class="form-control" id="${value.designator_type}"></div></div>`
+          html += `<div class="form-group">           
+                    <label for="${value.designator_type}" class="col-sm-6 col-form-label">${value.designator_type}</label>
+                    <div class=" number">
+                      <span class="minus">-</span>
+                        <input type="number" class="col-sm-2 col-form-label" id="${value.designator_type}">
+                      <span class="plus">+</span>
+                    </div>
+                  </div>`
+
         })
         $('.modal-body').html(html)
       })
     })
+
+    $(document).ready(function() {
+			$('.minus').click(function () {
+				var $input = $(this).parent().find('input');
+				var count = parseInt($input.val()) - 1;
+				count = count < 1 ? 1 : count;
+				$input.val(count);
+				$input.change();
+				return false;
+			});
+			$('.plus').click(function () {
+				var $input = $(this).parent().find('input');
+				$input.val(parseInt($input.val()) + 1);
+				$input.change();
+				return false;
+			});
+		});
+
   });
 </script>
 @endsection

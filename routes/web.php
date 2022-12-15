@@ -39,8 +39,6 @@ Route::group(['middleware' => 'login'], function () {
     Route::get('/admin/technician_list', 'AdminController@technician_list');
     Route::post('/admin/technician_list', 'AdminController@save_technician');
 
-
-
     // ajax
     Route::get('/ajax/call_out_material', 'LogisticsController@call_out_material');
     Route::get('/ajax/get_teknisi', 'AdminController@get_teknisi');
