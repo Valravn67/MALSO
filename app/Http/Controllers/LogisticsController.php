@@ -42,6 +42,24 @@ class LogisticsController extends Controller
 
         return view('logistics.out_material', compact('get_warehouse', 'get_technician'));
     }
+    
+    public function save_out_material(request $req)
+	{
+		DB::table('log_materials')->insert([
+            'warehouse_name' => $req->warehouse_name,
+            'nik' => $req->nik,
+            // 'designator_type' => $req->designator_type,
+            // 'qty' => $req->qty,  
+            'note' => $req->note
+        ]);
+
+        return back()->with('alerts', [
+            [
+                'type' => 'success',
+                'text' => 'Data teknisi telah ditambahkan!'
+            ]
+        ]);
+	}
 
     public function call_out_material(Request $req)
     {
@@ -58,6 +76,11 @@ class LogisticsController extends Controller
 
     public function report_out_material()
     {
-        return view('report.out_material');
+        $data = DB::table('out_materials')->get();
+
+        return view('report.out_material', compact('data','whname','get_mats'));
+   
     }
+
 }
+

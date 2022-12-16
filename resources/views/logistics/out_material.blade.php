@@ -28,7 +28,7 @@
       {{ csrf_field() }}
         <div class="form-group">
           <label for="warehouse_name">Warehouse Name </label>
-            <select class="form-control select2bs4" style="width: 100%;" name="warehouse_id" id="warehouse_id" required>
+            <select class="form-control select2bs4" style="width: 100%;" name="warehouse_name" id="warehouse_id" required>
                 <option value="" selected disabled>Select a Warehouse!</option>
                 @foreach ($get_warehouse as $warehouse)
                 <option value="{{ $warehouse->id }}">{{ $warehouse->text }}</option>
@@ -37,7 +37,7 @@
         </div>
         <div class="form-group">
           <label for="nik_technician">NIK Technician</label>
-            <select class="form-control select2bs4" style="width: 100%;" name="nik_technician" required>
+            <select class="form-control select2bs4" style="width: 100%;" name="nik" required>
                 <option value="" selected disabled>Select NIK Technician</option>
                 @foreach ($get_technician as $technician)
                 <option value="{{ $technician->id }}">{{ $technician->text }}</option>
@@ -45,14 +45,9 @@
             </select>
         </div>
         <div class="form-group">
-          <label for="rfc">No RFC</label>
-           <input type="text" class="form-control" id="rfc" name="rfc" placeholder="Input No. RFC">
-        </div>
-        <div class="form-group">
           <label for="note">Note</label>
-          <textarea class="form-control" rows="4" placeholder="Give ur Note, Here!" id="note" name="note"></textarea>
+          <textarea class="form-control" rows="4" placeholder="No RFC serta keterangannya" id="note" name="note"></textarea>
         </div>
-
         {{-- modal input material --}}
         <div class="form-group">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#input-material">Input Material's</button>
@@ -71,7 +66,7 @@
                   </div>
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" >Save changes</button>
                   </div>
                 </div>
               </div>
@@ -80,7 +75,7 @@
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#input-nte">Input NTE's</button>
         </div>
         <div class="form-group" style="text-align: right;">
-          <br />
+          <br/>
           <button type="submit" class="btn btn-primary">Upload!</button>
         </div>
       </form>
@@ -97,7 +92,7 @@
       theme: 'bootstrap4'
     })
 
-    $('#input-material').on('click', function(e) {
+    $('#input-material').click(function(e) {
       $.ajax({
       url: `/ajax/call_out_material`,
       method: 'GET',
@@ -111,7 +106,7 @@
                     <label for="${value.designator_type}" class="col-sm-6 col-form-label">${value.designator_type}</label>
                     <div class=" number">
                       <span class="minus">-</span>
-                        <input type="number" class="col-sm-2 col-form-label" id="${value.designator_type}">
+                        <input type="text" class="col-sm-2 col-form-label" id="${value.designator_type}">
                       <span class="plus">+</span>
                     </div>
                   </div>`

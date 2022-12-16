@@ -34,6 +34,7 @@ class LogisticsModel extends Model
 
     public static function call_out_material($id)
     {
-        return DB::table('stock_materials')->where('warehouse_id', $id)->get();
+        return DB::table('stock_materials')->get();
+        // return DB::table('stock_materials')->where('warehouse_id', $id)->get();
     }
 }

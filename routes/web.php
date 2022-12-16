@@ -27,6 +27,7 @@ Route::group(['middleware' => 'login'], function () {
     Route::get('/logistics/stock_material', 'LogisticsController@stock_material');
     Route::post('/logistics/stock_material', 'LogisticsController@save_stock_material');
     Route::get('/logistics/out_material', 'LogisticsController@out_material');
+    Route::post('/logistics/out_material', 'LogisticsController@save_out_material');
 
     // report
     Route::get('/report/stock_material', 'LogisticsController@report_stock_material');
@@ -35,7 +36,6 @@ Route::group(['middleware' => 'login'], function () {
     // super admin
     Route::get('/admin/warehouse_staff_list', 'AdminController@warehouse_staff_list');
     Route::post('/admin/warehouse_staff_list', 'AdminController@save_staff');
-        // technician
     Route::get('/admin/technician_list', 'AdminController@technician_list');
     Route::post('/admin/technician_list', 'AdminController@save_technician');
 
