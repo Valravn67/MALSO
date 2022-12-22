@@ -102,7 +102,7 @@
         $.each(e, function(key, value) {
           html += `<div class="form-group">           
                     <label for="${value.designator_type}" class="col-sm-6 col-form-label">${value.designator_type}</label>
-                    <div class=" number">
+                    <div class="number">
                       <span class="minus">-</span>
                         <input type="text" class="col-sm-2 col-form-label" id="${value.designator_type}">
                       <span class="plus">+</span>

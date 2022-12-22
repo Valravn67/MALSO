@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use App\Imports\LogisticsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
@@ -15,7 +16,7 @@ class LogisticsController extends Controller
 {
     public function stock_material()
     {
-        $get_warehouse = DB::table('gudang')->select('id_warehouse as id', 'warehouse_name as text')->get();
+        $get_warehouse = DB::table('gudang')->select('id_warehouse as id', 'warehouse_name as text')->orderBy('id_warehouse', 'ASC')->get();
         
         return view('logistics.stock_material', compact('get_warehouse'));
     }
@@ -76,10 +77,13 @@ class LogisticsController extends Controller
 
     public function report_out_material()
     {
-        $data = DB::table('out_materials')->get();
-        
+        $id = Input::get('id_warehouse');
 
-        return view('report.out_material', compact('data'));
+        $get_warehouse = DB::table('gudang')->select('id_warehouse as id', 'warehouse_name as text')->orderBy('id_warehouse', 'ASC')->get();
+
+        $data = LogisticsModel::report_out_material($id);
+
+        return view('report.out_material', compact('id', 'get_warehouse', 'data'));
    
     }
 
