@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="{{ asset('/plugins/select2/css/select2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('/css/view.css') }}">
-
 @endsection
 
 @section('content')
@@ -59,14 +58,13 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
                       <span aria-hidden="true">&times;</span>
                     </button>
-                  </div>
-                  
-                  <div class="modal-body">
-                  {{-- ajax jquery input material --}}
+                  </div> 
+                  <div class="modal-body" id="mats">
+                  {{-- ajax input material --}}
                   </div>
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" >Save changes</button>
+                    <button type="submit" class="btn btn-primary" >Save changes</button>
                   </div>
                 </div>
               </div>
@@ -92,7 +90,7 @@
       theme: 'bootstrap4'
     })
 
-    $('#input-material').click(function(e) {
+    $('#input-material').on('click',function(e) {
       $.ajax({
       url: `/ajax/call_out_material`,
       method: 'GET',
@@ -110,7 +108,6 @@
                       <span class="plus">+</span>
                     </div>
                   </div>`
-
         })
         $('.modal-body').html(html)
       })
@@ -134,5 +131,7 @@
 		});
 
   });
+
+  
 </script>
 @endsection

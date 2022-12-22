@@ -27,6 +27,11 @@
             <tbody>
             @foreach ($data as $value)
               <td>{{$value->id_warehouse}}</td>
+              <td>{{$value->id_technician}}</td>
+              {{-- <td>{{$value->id}}</td>
+              {{-- <td>{{$value->designator}}</td>
+              <td>{{$value->qty}}</td>
+              <td>{{$value->date}}</td> --}} 
             @endforeach 
             </tbody>
         </table>

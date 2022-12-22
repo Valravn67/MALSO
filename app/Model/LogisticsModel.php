@@ -24,17 +24,19 @@ class LogisticsModel extends Model
 
     public static function report_out_material()
     {
-        return DB::table('gudang')
-            ->join('stock_materials', 'gudang.id_warehouse', '=', 'stock_materials.warehouse_id')
-            ->join('technician', 'gudang.id_warehouse', '=', 'technician.id_technician')
-            ->groupBy('gudang.warehouse_name', 'stock_materials.designator_type')
-            ->orderBy('stock_materials.designator_type', 'ASC')
-            ->get();
+        // return DB::table('out_materials')
+        //     ->join('stock_materials', 'gudang.id_warehouse', '=', 'stock_materials.warehouse_id')
+        //     ->join('technician', 'gudang.id_warehouse', '=', 'technician.id_technician')
+        //     ->groupBy('gudang.warehouse_name', 'stock_materials.designator_type')
+        //     ->orderBy('stock_materials.designator_type', 'ASC')
+        //     ->get();
     }
 
     public static function call_out_material($id)
     {
-        return DB::table('stock_materials')->get();
-        // return DB::table('stock_materials')->where('warehouse_id', $id)->get();
+        // return DB::table('stock_materials')->get();
+        return DB::table('stock_materials')->where('warehouse_id', $id)->get();
     }
+
+
 }
