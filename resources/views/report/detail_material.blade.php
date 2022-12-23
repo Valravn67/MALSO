@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Report Out Materials')
+@section('title', 'Detail Material')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('/plugins/select2/css/select2.min.css') }}">
@@ -10,25 +10,6 @@
 @endsection
 
 @section('content')
-
-<div class="card-body">
-    <form method="GET">
-        <div class="col-md-12 row" style="vertical-align: middle; text-align: center">
-            <div class="form-group col-md-10">
-                <select class="form-control select2bs4" style="width: 100%;" name="id_warehouse" required>
-                    <option value="" selected disabled>Select a Warehouse!</option>
-                    @foreach ($get_warehouse as $warehouse)
-                    <option data-subtext="description 1" value="{{ $warehouse->id }}" <?php if ($warehouse->id == $id) { echo "Selected"; } else { echo ""; } ?>>{{ $warehouse->text }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group col-md-2">
-                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Search</button>
-            </div>
-        </div>
-    </form>
-</div>
-
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">List</h3>
@@ -37,22 +18,16 @@
         <table id="dataTableOutMaterials" class="table table-bordered table-striped text-nowrap" style="text-align: center;">
             <thead>
                 <tr>
-                    <th>Designator Type</th>
-                    <th>Designator</th>
+                    <th>Teknisi</th>
                     <th>Terpakai</th>
-                    <th>Sisa</th>
                 </tr>
             </thead>
-            <tbody>
             @foreach ($data as $value)
                 <tr>
-                    <td>{{ $value->designator_type }}</td>
-                    <td>{{ $value->designator }}</td>
-                    <td><a href="">{{ $value->terpakai }}</a></td>
-                    <td>{{ $value->sisa }}</td>
+                    <td>{{ $value->name }}</td>
+                    <td>{{ $value->qty }}</td>
                 </tr>
-            @endforeach 
-            </tbody>
+            @endforeach
         </table>
     </div>
 </div>

@@ -13,6 +13,11 @@ class LogisticsModel extends Model
  
     protected $fillable = ['warehouse_id', 'note', 'designator', 'designator_type', 'unit', 'qty'];
 
+    public static function call_out_material($id)
+    {
+        return DB::table('stock_materials')->where('warehouse_id', $id)->get();
+    }
+
     public static function report_stock_material()
     {
         return DB::table('gudang')
@@ -34,10 +39,13 @@ class LogisticsModel extends Model
         ->get();
     }
 
-    public static function call_out_material($id)
+    public static function detail_material()
     {
-        return DB::table('stock_materials')->where('warehouse_id', $id)->get();
+        return DB::table('out_materials AS om')
+        ->join('technician as t', 'om.id_technician', '=', 't.id_technician')
+        ->select('t.nik','t.name','om.qty')
+        ->groupBy('t.name','om.qty')
+        ->get();
     }
-
 
 }

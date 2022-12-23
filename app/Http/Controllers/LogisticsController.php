@@ -87,5 +87,16 @@ class LogisticsController extends Controller
    
     }
 
+	public function detail_material()
+	{
+        // $id = input::get('out_material');    
+        
+        // $get_mat = DB::table('stock_materials')->select('id as id', 'designator_type as dsg')->orderBy('id','ASC')->get();
+
+        $data = LogisticsModel::detail_material();
+
+        return view('report.detail_material', compact('data'));    
+	}
+
 }
 
