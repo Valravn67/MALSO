@@ -107,7 +107,7 @@
               <div class="col-sm-6 form-group">
                 <div class="number">
                   <span class="minus">-</span>
-                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="col-sm-2 col-form-label" id="${value.designator_type}" name="id_mats[${value.id}]">
+                    <input type="text" class="col-sm-2 col-form-label" id="${value.designator_type}" name="id_mats[${value.id}]">
                   <span class="plus">+</span>
                 </div>
               </div>

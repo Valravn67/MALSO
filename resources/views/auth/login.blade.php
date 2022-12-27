@@ -19,15 +19,15 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-color: #E21A25">
 <div class="login-box">
   <div class="login-logo">
-    <b>Telkom Akses</b>
+    <img src="/dist/img/logotelkomakses.png" alt="telkomakses-logo">
   </div>
   <!-- /.login-logo -->
   <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+    <div class="card-body login-card-body" style="background-color: #850000" >
+      <p class="login-box-msg" style="color: white">Sign in to start your session</p>
 
       <form method="post">
         {{ csrf_field() }}
@@ -35,7 +35,7 @@
           <input type="text" class="form-control" placeholder="Username" name="username">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+              <span class="fas fa-envelope" style="color: white"></span>
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@
           <input type="password" class="form-control" placeholder="Password" name="password">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+              <span class="fas fa-lock" style="color: white"></span>
             </div>
           </div>
         </div>
@@ -51,7 +51,7 @@
           <div class="col-8">
             <div class="icheck-primary">
               <input type="checkbox" id="remember">
-              <label for="remember">
+              <label for="remember" style="color: white">
                 Remember Me
               </label>
             </div>
@@ -66,7 +66,7 @@
 
       <!-- /.social-auth-links -->
       <p class="mb-0">
-        <a href="/register" class="text-center">Register </a>
+        <a href="/register" class="text-center" style="color: white">Register </a>
       </p>
     </div>
     <!-- /.login-card-body -->

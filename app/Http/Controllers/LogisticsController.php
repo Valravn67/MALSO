@@ -99,7 +99,7 @@ class LogisticsController extends Controller
         $id_mats = input::get('id_mats');
 
         $data = LogisticsModel::detail_material($id_warehouse, $id_mats);
-        dd($data);
+        // dd($data);
 
         return view('report.detail_material', compact('data'));    
 	}

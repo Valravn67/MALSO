@@ -12,8 +12,10 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">List</h3>
+        {{--  <h3 class="card-title">{{ $data->designator }}</h3> --}}
+        <h3 class="card-title">{{ $data[0]->designator }}</h3>
     </div>
+
     <div class="card-body">        
         <table id="dataTableOutMaterials" class="table table-bordered table-striped text-nowrap" style="text-align: center;">
             <thead>
@@ -30,6 +32,7 @@
             @endforeach
         </table>
     </div>
+
 </div>
 @endsection
 

@@ -13,7 +13,7 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css') }}"/>
     <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="{{ asset('/dist/css/adminlte.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/dist/css/adminlte.css') }}" />
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
 
@@ -39,22 +39,22 @@
       </nav>
       <!-- /.navbar -->
       <!-- Main Sidebar Container -->
-      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #850000">
         <!-- Brand Logo -->
         <a href="/" class="brand-link">
-          <img src="/dist/img/poliban.png" alt="telkomakses-logo" class="brand-image elevation-3" style="opacity: 0.8;" />
-          <span class="brand-text font-weight-light">MALSO</span>
+          <img src="/dist/img/iconta.png" alt="telkomakses-logo" class="brand-image elevation-3" />
+          <span class="brand-text font-weight-light" style="color: azure">MALSO</span>
         </a>
 
         <!-- Sidebar -->
         <div class="sidebar">
           <!-- Sidebar user (optional) -->
-          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex" >
             <div class="image">
               <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
             </div>
             <div class="info">
-              <a href="#" class="d-block">{{ session('auth')->username }}</a>
+              <a href="#" class="d-block" style="color: azure">{{ session('auth')->username }}</a>
             </div>
           </div>
 
@@ -62,7 +62,7 @@
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <li class="nav-item has-treeview">
-                <a href="javascript:void(0)" class="nav-link">
+                <a href="javascript:void(0)" class="nav-link" style="color: azure">
                   <i class="nav-icon fas fa-edit"></i>
                   <p>
                     Input Data
@@ -71,13 +71,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="/logistics/stock_material" class="nav-link">
+                    <a href="/logistics/stock_material" class="nav-link" style="color: azure">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Stock Materials</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/logistics/out_material" class="nav-link">
+                    <a href="/logistics/out_material" class="nav-link" style="color: azure">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Out Materials</p>
                     </a>
@@ -85,8 +85,8 @@
                 </ul>
               </li>
               <li class="nav-item has-treeview">
-                <a href="javascript:void(0)" class="nav-link">
-                  <i class="nav-icon fas fa-warehouse"></i>
+                <a href="javascript:void(0)" class="nav-link" style="color: azure">
+                  <i class="nav-icon fas fa-warehouse" ></i>
                   <p>
                     Report
                     <i class="right fas fa-angle-left"></i>
@@ -94,22 +94,22 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="/report/stock_material" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
+                    <a href="/report/stock_material" class="nav-link" style="color: azure">
+                      <i class="far fa-circle nav-icon" ></i>
                       <p>Stock Materials</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/report/out_material" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
+                    <a href="/report/out_material" class="nav-link" style="color: azure">
+                      <i class="far fa-circle nav-icon" ></i>
                       <p>Out Materials</p>
                     </a>
                   </li>
                 </ul>
               </li>
               <li class="nav-item has-treeview">
-                <a href="javascript:void(0)" class="nav-link">
-                  <i class="nav-icon fas fa-user"></i>
+                <a href="javascript:void(0)" class="nav-link" style="color: azure">
+                  <i class="nav-icon fas fa-user" ></i>
                   <p>
                     Super Admin
                     <i class="right fas fa-angle-left"></i>
@@ -117,14 +117,14 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="/admin/warehouse_staff_list" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
+                    <a href="/admin/warehouse_staff_list" class="nav-link" style="color: azure">
+                      <i class="far fa-circle nav-icon" ></i>
                       <p>Warehouse Staff List</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/admin/technician_list" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
+                    <a href="/admin/technician_list" class="nav-link" style="color: azure">
+                      <i class="far fa-circle nav-icon" ></i>
                       <p>Technician List</p>
                     </a>
                   </li>
