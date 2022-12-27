@@ -39,20 +39,26 @@ class LogisticsController extends Controller
     public function out_material()
     {
         $get_warehouse = DB::table('gudang')->select('id_warehouse as id', 'warehouse_name as text')->get();
-        $get_technician = DB::table('technician')->select('nik as id', 'name as text')->get();
+        $get_technician = DB::table('technician')->get();
 
         return view('logistics.out_material', compact('get_warehouse', 'get_technician'));
     }
     
     public function save_out_material(request $req)
 	{
-		DB::table('out_materials')->insert([
-            'warehouse_name' => $req->warehouse_name,
-            'nik' => $req->nik,
-            // 'designator_type' => $req->designator_type,
-            // 'qty' => $req->qty,  
-            'note' => $req->note
-        ]);
+        foreach ($req->id_mats as $id_mats => $qty)
+        {
+            if (!in_array($qty, [0, NULL]))
+            {
+                DB::table('out_materials')->insert([
+                    'id_warehouse' => $req->id_warehouse,
+                    'id_technician' => $req->id_technician,
+                    'id_mats' => $id_mats,
+                    'qty' => $qty,
+                    'note' => $req->note
+                ]);
+            }
+        }
 
         return back()->with('alerts', [
             [
@@ -89,11 +95,11 @@ class LogisticsController extends Controller
 
 	public function detail_material()
 	{
-        // $id = input::get('out_material');    
-        
-        // $get_mat = DB::table('stock_materials')->select('id as id', 'designator_type as dsg')->orderBy('id','ASC')->get();
+        $id_warehouse = input::get('id_warehouse');
+        $id_mats = input::get('id_mats');
 
-        $data = LogisticsModel::detail_material();
+        $data = LogisticsModel::detail_material($id_warehouse, $id_mats);
+        dd($data);
 
         return view('report.detail_material', compact('data'));    
 	}

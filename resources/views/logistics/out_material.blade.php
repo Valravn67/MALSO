@@ -26,8 +26,8 @@
       <form method="post" enctype="multipart/form-data" autocomplete="off">
       {{ csrf_field() }}
         <div class="form-group">
-          <label for="warehouse_name">Warehouse Name </label>
-            <select class="form-control select2bs4" style="width: 100%;" name="warehouse_name" id="warehouse_id" required>
+          <label for="id_warehouse">Warehouse Name </label>
+            <select class="form-control select2bs4" style="width: 100%;" name="id_warehouse" id="id_warehouse" required>
                 <option value="" selected disabled>Select a Warehouse!</option>
                 @foreach ($get_warehouse as $warehouse)
                 <option value="{{ $warehouse->id }}">{{ $warehouse->text }}</option>
@@ -36,10 +36,10 @@
         </div>
         <div class="form-group">
           <label for="nik_technician">NIK Technician</label>
-            <select class="form-control select2bs4" style="width: 100%;" name="nik" required>
+            <select class="form-control select2bs4" style="width: 100%;" name="id_technician" required>
                 <option value="" selected disabled>Select NIK Technician</option>
                 @foreach ($get_technician as $technician)
-                <option value="{{ $technician->id }}">{{ $technician->text }}</option>
+                <option value="{{ $technician->id_technician }}">{{ $technician->name }} ({{ $technician->nik }})</option>
                 @endforeach
             </select>
         </div>
@@ -49,8 +49,8 @@
         </div>
         {{-- modal input material --}}
         <div class="form-group">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#input-material">Input Material's</button>
-            <div class="modal fade" id="input-material">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#input-material-modal" id="input-material-btn">Input Material's</button>
+            <div class="modal fade" id="input-material-modal">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -90,44 +90,49 @@
       theme: 'bootstrap4'
     })
 
-    $('#input-material').on('click',function(e) {
+    $('#input-material-btn').on('click',function(e) {
       $.ajax({
       url: `/ajax/call_out_material`,
       method: 'GET',
-      data: {id: $('#warehouse_id').val()},
+      data: {id: $('#id_warehouse').val()},
       dataType: 'json',
       }).done(function (e) {
-        console.log(e)
         var html = "";
         $.each(e, function(key, value) {
-          html += `<div class="form-group">           
-                    <label for="${value.designator_type}" class="col-sm-6 col-form-label">${value.designator_type}</label>
-                    <div class="number">
-                      <span class="minus">-</span>
-                        <input type="text" class="col-sm-2 col-form-label" id="${value.designator_type}">
-                      <span class="plus">+</span>
-                    </div>
-                  </div>`
-        })
+          html += `
+          <div class="col-sm-12 form-group row" style="vertical-align: middle; text-align: center">
+              <div class="col-sm-6 form-group">
+                <label for="${value.designator_type}" class="col-form-label">${value.designator_type}</label>
+              </div>
+              <div class="col-sm-6 form-group">
+                <div class="number">
+                  <span class="minus">-</span>
+                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="col-sm-2 col-form-label" id="${value.designator_type}" name="id_mats[${value.id}]">
+                  <span class="plus">+</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `})
         $('.modal-body').html(html)
       })
     })
 
     $(document).ready(function() {
-			$('.minus').click(function () {
-				var $input = $(this).parent().find('input');
+      $(document).on('click', '.minus', function() {
+        var $input = $(this).parent().find('input');
 				var count = parseInt($input.val()) - 1;
-				count = count < 1 ? 1 : count;
+				count = count < 0 ? 1 : count;
 				$input.val(count);
 				$input.change();
 				return false;
-			});
-			$('.plus').click(function () {
-				var $input = $(this).parent().find('input');
-				$input.val(parseInt($input.val()) + 1);
+      })
+      $(document).on('click', '.plus', function() {
+        var $input = $(this).parent().find('input');
+				$input.val((parseInt($input.val()) || 0) + 1);
 				$input.change();
 				return false;
-			});
+      })
 		});
 
   });

@@ -31,20 +31,22 @@ class LogisticsModel extends Model
     {
         return DB::table('out_materials AS om')
         ->join('gudang AS g', 'om.id_warehouse', '=', 'g.id_warehouse')
-        ->join('technician AS t', 'om.id_technician', '=', 't.id_technician')
         ->join('stock_materials AS sm', 'om.id_mats', '=', 'sm.id')
-        ->select('g.warehouse_name', 'sm.designator_type', 'sm.designator', 'om.qty AS terpakai', 'sm.qty AS sisa')
+        ->select('g.warehouse_name', 'sm.id AS id_designator', 'sm.designator_type', 'sm.designator', 'om.qty AS terpakai', 'sm.qty AS sisa')
         ->where('g.id_warehouse', $id)
-        ->groupBy('sm.designator_type')
+        ->groupBy('sm.id')
         ->get();
     }
 
-    public static function detail_material()
+    public static function detail_material($id_warehouse, $id_mats)
     {
         return DB::table('out_materials AS om')
-        ->join('technician as t', 'om.id_technician', '=', 't.id_technician')
-        ->select('t.nik','t.name','om.qty')
-        ->groupBy('t.name','om.qty')
+        ->join('gudang AS g', 'om.id_warehouse', '=', 'g.id_warehouse')
+        ->join('technician AS t', 'om.id_technician', '=', 't.id_technician')
+        ->join('stock_materials AS sm', 'om.id_mats', '=', 'sm.id')
+        ->select('g.warehouse_name' , 'sm.designator_type', 'sm.designator', 'om.qty', 't.nik', 't.name')
+        ->where('om.id_warehouse', $id_warehouse)
+        ->where('om.id_mats', $id_mats)
         ->get();
     }
 
