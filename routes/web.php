@@ -23,6 +23,8 @@ Route::group(['middleware' => 'login'], function () {
         return view('layout');
     });
 
+    Route::get('/', 'HomeController@home');
+
     // input data
     Route::get('/logistics/stock_material', 'LogisticsController@stock_material');
     Route::post('/logistics/stock_material', 'LogisticsController@save_stock_material');

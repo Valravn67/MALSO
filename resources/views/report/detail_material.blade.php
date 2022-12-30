@@ -24,19 +24,26 @@
                     <th>Terpakai</th>
                 </tr>
             </thead>
+            <tbody>
             @php
-            $tp = 0
+                $total = 0;
             @endphp
             @foreach ($data as $value)
+            @php
+                $total += $value->qty;
+            @endphp
                 <tr>
                     <td>{{ $value->name }}</td>
                     <td>{{ $value->qty }}</td>
-                    @php
-                        $tp = $tp + $value->qty   
-                    @endphp
                 </tr>
             @endforeach
-            {{$tp}}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><b>Total</b></td>
+                    <td><b>{{ $total }}</b></td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 

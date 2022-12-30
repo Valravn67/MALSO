@@ -8,10 +8,6 @@ date_default_timezone_set("Asia/Makassar");
  
 class LogisticsModel extends Model
 {
-    protected $table = "stock_materials";
- 
-    protected $fillable = ['warehouse_id', 'note', 'designator', 'designator_type', 'unit', 'qty'];
-
     public static function call_out_material($id)
     {
         return DB::table('stock_materials')->where('warehouse_id', $id)->get();
@@ -48,6 +44,64 @@ class LogisticsModel extends Model
         ->where('om.id_warehouse', $id_warehouse)
         ->where('om.id_mats', $id_mats)
         ->get();
+    }
+
+    public static function dashboard_material($view, $type)
+    {
+        switch ($view) {
+            case 'stock_materials':
+                switch ($type) {
+                    case 'day':
+                        $days = '';
+                        for ($i = 1; $i < date('t') + 1; $i ++)
+                        {
+                            if ($i < 10)
+                            {
+                                $keys = '0'.$i;
+                            } else {
+                                $keys = $i;
+                            }
+                            $days .= ',SUM(CASE WHEN (DATE(sm.updated_at) = "'.date('Y-m-').''.$keys.'") THEN 1 ELSE 0 END) as sm_day'.$keys.'';
+                        }
+                        return DB::select('
+                            SELECT
+                            g.warehouse_name
+                            '.$days.'
+                            FROM stock_materials sm
+                            LEFT JOIN gudang g ON sm.warehouse_id = g.id_warehouse
+                            GROUP BY g.warehouse_name
+                        ');
+                        break;
+                    case 'month':
+                        $months = ['januari' => '01', 'februari' => '02', 'maret' => '03', 'april' => '04', 'mei' => '05', 'juni' => '06', 'juli' => '07', 'agustus' => '08', 'september' => '09', 'oktober' => '10', 'november' => '11', 'desember' => '12'];
+                        $sums = '';
+                        foreach ($months as $key => $value)
+                        {
+                            $keys = date('Y-').$value;
+                            $sums .= ',SUM(CASE WHEN (DATE(sm.updated_at) LIKE "'.$keys.'%") THEN 1 ELSE 0 END) as '.$key;
+                        }
+                        return DB::select('
+                            SELECT
+                            g.warehouse_name
+                            '.$sums.'
+                            FROM stock_materials sm
+                            LEFT JOIN gudang g ON sm.warehouse_id = g.id_warehouse
+                            GROUP BY g.warehouse_name
+                        ');
+                        break;
+                }
+                break;
+            case 'out_materials':
+                switch ($type) {
+                    case 'day':
+                        # code...
+                        break;
+                    case 'month':
+                        # code...
+                        break;
+                }
+                break;
+        }
     }
 
 }

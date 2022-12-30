@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
-use App\Imports\LogisticsImport;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Model\LogisticsModel;
 
@@ -23,10 +21,28 @@ class LogisticsController extends Controller
 
     public function save_stock_material(Request $req)
     {
-		$file = $req->file('upload_stock');
-		$nama_file = rand().$file->getClientOriginalName();
-		$file->move('stock_warehouse',$nama_file);
-		Excel::import(new LogisticsImport($req), public_path('/stock_warehouse/'.$nama_file));
+        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
+		$reader->setReadDataOnly(true);
+		$spreadSheet = $reader->load($req->file('upload_stock'));
+		$sheet = $spreadSheet->getSheet($spreadSheet->getFirstSheetIndex());
+		$data = $sheet->toArray();
+		unset($data[0]);
+        foreach ($data as $key => $value)
+		{
+            $check = DB::table('stock_materials')->where('designator_type', $value[1])->first();
+            DB::table('stock_materials')
+            ->where('warehouse_id', $req->warehouse_id)
+            ->where('designator_type', $value[1])
+            ->update([
+                'warehouse_id' => $req->warehouse_id,
+                'note' => $req->note,
+                'designator' => $value[0],
+                'designator_type' => $value[1],
+                'unit' => $value[2],
+                'qty' => ($check->qty + $value[3]),
+                'created_at' => date('Y-m-d H:i:s')
+            ]);
+        }
  
         return redirect('/logistics/stock_material')->with('alerts', [
             [
@@ -88,7 +104,6 @@ class LogisticsController extends Controller
         $get_warehouse = DB::table('gudang')->select('id_warehouse as id', 'warehouse_name as text')->orderBy('id_warehouse', 'ASC')->get();
 
         $data = LogisticsModel::report_out_material($id);
-        // dd($data);
         return view('report.out_material', compact('id', 'get_warehouse', 'data'));
    
     }
@@ -99,7 +114,6 @@ class LogisticsController extends Controller
         $id_mats = input::get('id_mats');
 
         $data = LogisticsModel::detail_material($id_warehouse, $id_mats);
-        // $tp = LogisticsModel::sum_tp('id_log');
 
         return view('report.detail_material', compact('data'));    
 	}
