@@ -45,4 +45,5 @@ Route::group(['middleware' => 'login'], function () {
     Route::get('/ajax/get_teknisi', 'AdminController@get_teknisi');
     Route::get('/ajax/get_warehouse_staff', 'AdminController@get_warehouse_staff');
     
+    Route::get('logout','LoginController@logout');
 });

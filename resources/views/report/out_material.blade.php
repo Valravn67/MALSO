@@ -48,7 +48,8 @@
                 <tr>
                     <td>{{ $value->designator_type }}</td>
                     <td>{{ $value->designator }}</td>
-                    <td><a href="/report/detail_material?id_warehouse={{ $id }}&id_mats={{ $value->id_designator }}">{{ $value->terpakai }}</a></td>                    <td>{{ $value->sisa }}</td>
+                    <td><a href="/report/detail_material?id_warehouse={{ $id }}&id_mats={{ $value->id_designator }}">{{ $value->terpakai }}</a></td>
+                    <td>{{ $value->sisa }}</td>            
                 </tr>
             @endforeach 
             </tbody>

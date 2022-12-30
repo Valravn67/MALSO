@@ -22,7 +22,7 @@
 <body class="hold-transition login-page" style="background-color: #E21A25">
 <div class="login-box">
   <div class="login-logo">
-    <img src="/dist/img/logotelkomakses.png" alt="telkomakses-logo">
+    <img src="/dist/img/malso.png" alt="telkomakses-logo" style="width: 347px;" >
   </div>
   <!-- /.login-logo -->
   <div class="card">

@@ -130,6 +130,12 @@
                   </li>
                 </ul>
               </li>
+              <li class="nav-item">
+                    <a href="/logout" class="nav-link" style="color: azure; ">
+                      <i class="fas fa-sign-out-alt nav-icon"></i>
+                      <p>Logout</p>
+                    </a>
+              </li>
             </ul>
           </nav>
           <!-- /.sidebar-menu -->

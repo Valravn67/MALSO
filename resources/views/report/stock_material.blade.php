@@ -13,7 +13,7 @@
         <h3 class="card-title">List</h3>
     </div>
     <div class="card-body table-responsive">
-        <table id="dataStockMaterials" class="table table-bordered text-nowrap" style="text-align: center;">
+        <table id="dataStockMaterials" class="table table-bordered text-nowrap " style="text-align: center;">
             <thead>
                 <tr>
                     <th>DESIGNATOR TYPE</th>
@@ -38,6 +38,7 @@
 @endsection
 
 @section('js')
+<script src="{{ asset('/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{ asset('/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
@@ -55,7 +56,7 @@
     var groupColumn = 1;
     var table = $('#dataStockMaterials').DataTable({
         responsive: true,
-        lengthChange: false,
+        // lengthChange: false,
         autoWidth: false,
         buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
         columnDefs: [{ visible: false, targets: groupColumn }],

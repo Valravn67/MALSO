@@ -31,7 +31,7 @@ class LogisticsController extends Controller
         return redirect('/logistics/stock_material')->with('alerts', [
             [
                 'type' => 'success',
-                'text' => 'Data Stok Berhasil Diimport!'
+                'text' => 'Data Stok Berhasil Diimport!' 
             ]
         ]);
     }
@@ -88,7 +88,7 @@ class LogisticsController extends Controller
         $get_warehouse = DB::table('gudang')->select('id_warehouse as id', 'warehouse_name as text')->orderBy('id_warehouse', 'ASC')->get();
 
         $data = LogisticsModel::report_out_material($id);
-
+        // dd($data);
         return view('report.out_material', compact('id', 'get_warehouse', 'data'));
    
     }
@@ -99,7 +99,7 @@ class LogisticsController extends Controller
         $id_mats = input::get('id_mats');
 
         $data = LogisticsModel::detail_material($id_warehouse, $id_mats);
-        // dd($data);
+        // $tp = LogisticsModel::sum_tp('id_log');
 
         return view('report.detail_material', compact('data'));    
 	}

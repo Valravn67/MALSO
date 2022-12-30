@@ -4,7 +4,6 @@ namespace App\Model;
  
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-
 date_default_timezone_set("Asia/Makassar");
  
 class LogisticsModel extends Model
@@ -32,10 +31,11 @@ class LogisticsModel extends Model
         return DB::table('out_materials AS om')
         ->join('gudang AS g', 'om.id_warehouse', '=', 'g.id_warehouse')
         ->join('stock_materials AS sm', 'om.id_mats', '=', 'sm.id')
-        ->select('g.warehouse_name', 'sm.id AS id_designator', 'sm.designator_type', 'sm.designator', 'om.qty AS terpakai', 'sm.qty AS sisa')
+        ->select('g.warehouse_name', 'sm.id AS id_designator', 'sm.designator_type', 'sm.designator', DB::Raw("sum(om.qty) AS terpakai"), 'sm.qty AS sisa')
         ->where('g.id_warehouse', $id)
         ->groupBy('sm.id')
         ->get();
+
     }
 
     public static function detail_material($id_warehouse, $id_mats)
