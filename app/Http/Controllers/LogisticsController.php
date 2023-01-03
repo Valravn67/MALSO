@@ -28,22 +28,36 @@ class LogisticsController extends Controller
 		$data = $sheet->toArray();
 		unset($data[0]);
         foreach ($data as $key => $value)
-		{
+		{  
             $check = DB::table('stock_materials')->where('designator_type', $value[1])->first();
+            if($check){
+                DB::table('stock_materials')
+                ->where('warehouse_id', $req->warehouse_id)
+                ->where('designator_type', $value[1])
+                ->update([
+                    'warehouse_id' => $req->warehouse_id,
+                    'note' => $req->note,
+                    'designator' => $value[0],
+                    'designator_type' => $value[1],
+                    'unit' => $value[2],
+                    'qty' => ($check->qty + $value[3]),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+            }
+            else{
             DB::table('stock_materials')
-            ->where('warehouse_id', $req->warehouse_id)
-            ->where('designator_type', $value[1])
-            ->update([
-                'warehouse_id' => $req->warehouse_id,
-                'note' => $req->note,
-                'designator' => $value[0],
-                'designator_type' => $value[1],
-                'unit' => $value[2],
-                'qty' => ($check->qty + $value[3]),
-                'created_at' => date('Y-m-d H:i:s')
-            ]);
+                ->insert([
+                    'warehouse_id' => $req->warehouse_id,
+                    'note' => $req->note,
+                    'designator' => $value[0],
+                    'designator_type' => $value[1],
+                    'unit' => $value[2],
+                    'qty' => $value[3],
+                    'created_at' => date('Y-m-d H:i:s')
+                ]);
+            }
         }
- 
+        dd($data);
         return redirect('/logistics/stock_material')->with('alerts', [
             [
                 'type' => 'success',

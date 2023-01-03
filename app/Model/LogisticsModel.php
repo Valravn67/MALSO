@@ -8,6 +8,7 @@ date_default_timezone_set("Asia/Makassar");
  
 class LogisticsModel extends Model
 {
+        
     public static function call_out_material($id)
     {
         return DB::table('stock_materials')->where('warehouse_id', $id)->get();
@@ -94,10 +95,28 @@ class LogisticsModel extends Model
             case 'out_materials':
                 switch ($type) {
                     case 'day':
-                        # code...
+                        
                         break;
                     case 'month':
-                        # code...
+                        $days = '';
+                        for ($i = 1; $i < date('t') + 1; $i ++)
+                        {
+                            if ($i < 10)
+                            {
+                                $keys = '0'.$i;
+                            } else {
+                                $keys = $i;
+                            }
+                            $days .= ',SUM(CASE WHEN (DATE(sm.updated_at) = "'.date('Y-m-').''.$keys.'") THEN 1 ELSE 0 END) as sm_day'.$keys.'';
+                        }
+                        return DB::select('
+                            SELECT
+                            g.warehouse_name
+                            '.$days.'
+                            FROM stock_materials sm
+                            LEFT JOIN gudang g ON sm.warehouse_id = g.id_warehouse
+                            GROUP BY g.warehouse_name
+                        ');
                         break;
                 }
                 break;
