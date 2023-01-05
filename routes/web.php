@@ -23,7 +23,7 @@ Route::group(['middleware' => 'login'], function () {
         return view('layout');
     });
 
-    Route::get('/', 'HomeController@home');
+    Route::get('/', 'LogisticsController@report_stock_material');
 
     // input data
     Route::get('/logistics/stock_material', 'LogisticsController@stock_material');

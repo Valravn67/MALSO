@@ -19,15 +19,15 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition register-page">
+<body class="hold-transition register-page" style="background-image: url(/dist/img/bg.png); background-size: 100%; background-position: bottom">
 <div class="register-box">
   <div class="register-logo">
-    <b>Telkom Akses</b><br>
+    <img src="/dist/img/malso_r.png" alt="telkomakses-logo" style="width: 334px; " >
   </div>
 
   <div class="card">
-    <div class="card-body register-card-body">
-      <p class="login-box-msg">Register</p>
+    <div class="card-body register-card-body" style="background-color: #850000">
+      <p class="login-box-msg" style="color: azure">Register</p>
 
       <form method="post">
         {{ csrf_field() }}
@@ -35,7 +35,7 @@
           <input type="text" class="form-control" placeholder="Username" name="username">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+              <span class="fas fa-envelope" style="color: azure"></span>
             </div>
           </div>
         </div>
@@ -43,14 +43,14 @@
           <input type="password" class="form-control" placeholder="Password" name="password">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+              <span class="fas fa-lock" style="color: azure"></span>
             </div>
           </div>
         </div>
         <div class="row">
           <!-- /.col -->
           <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <button type="submit" class="btn btn-primary btn-block" style="color: azure">Register</button>
           </div>
           <!-- /.col -->
         </div>

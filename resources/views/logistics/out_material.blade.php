@@ -69,8 +69,6 @@
                 </div>
               </div>
             </div>
-
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#input-nte">Input NTE's</button>
         </div>
         <div class="form-group" style="text-align: right;">
           <br/>
@@ -107,7 +105,7 @@
               <div class="col-sm-6 form-group">
                 <div class="number">
                   <span class="minus">-</span>
-                    <input type="text" class="col-sm-2 col-form-label" id="${value.designator_type}" name="id_mats[${value.id}]">
+                    <input type="text" class="col-sm-3 col-form-label" id="${value.designator_type}" name="id_mats[${value.id}]">
                   <span class="plus">+</span>
                 </div>
               </div>

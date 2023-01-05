@@ -41,20 +41,20 @@
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #850000">
         <!-- Brand Logo -->
-        <a href="/" class="brand-link">
-          <img src="/dist/img/iconta.png" alt="telkomakses-logo" class="brand-image elevation-3" />
-          <span class="brand-text font-weight-light" style="color: azure">MALSO</span>
-        </a>
+        <div class="brand-link">
+          <img src="/dist/img/malso.png" alt="telkomakses-logo" class="brand-text" style="width: 234px "/>
+          {{-- <span class="brand-text font-weight-light" style="color: azure">.</span> --}}
+        </div>
 
         <!-- Sidebar -->
         <div class="sidebar">
           <!-- Sidebar user (optional) -->
           <div class="user-panel mt-3 pb-3 mb-3 d-flex" >
             <div class="image">
-              <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+              <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2"/>
             </div>
             <div class="info">
-              <a href="#" class="d-block" style="color: azure">{{ session('auth')->username }}</a>
+              <div class="d-block" style="color: azure">{{ session('auth')->username }}</div>
             </div>
           </div>
 

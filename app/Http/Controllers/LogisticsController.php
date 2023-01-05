@@ -26,14 +26,14 @@ class LogisticsController extends Controller
 		$spreadSheet = $reader->load($req->file('upload_stock'));
 		$sheet = $spreadSheet->getSheet($spreadSheet->getFirstSheetIndex());
 		$data = $sheet->toArray();
-		// unset($data[0]);
+		unset($data[0]);
             
         foreach ($data as $key => $value)
 		{  
             $check = DB::table('stock_materials')
-                    ->where('designator_type', $value[1])
-                    ->where('warehouse_id', $req->warehouse_id)        
-                    ->first();
+            ->where('designator_type', $value[1])
+            ->where('warehouse_id', $req->warehouse_id)
+            ->first();
             if($check){
                 DB::table('stock_materials')
                 ->where('warehouse_id', $req->warehouse_id)
@@ -61,7 +61,6 @@ class LogisticsController extends Controller
                 ]);
             }
         }
-        // dd($data);s
         return redirect('/logistics/stock_material')->with('alerts', [
             [
                 'type' => 'success',
