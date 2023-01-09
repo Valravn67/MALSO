@@ -22,6 +22,7 @@
                 <tr>
                     <th>Teknisi</th>
                     <th>Terpakai</th>
+                    <th>Tanggal</th>
                 </tr>
             </thead>
          <tbody>
@@ -35,6 +36,7 @@
                 <tr>
                     <td>{{ $value->name }}</td>
                     <td>{{ $value->qty }}</td>
+                    <td>{{ $value->created_at}}</td>
                 </tr>
             @endforeach
             </tbody>

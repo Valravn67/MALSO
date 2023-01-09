@@ -88,7 +88,8 @@ class LogisticsController extends Controller
                     'id_technician' => $req->id_technician,
                     'id_mats' => $id_mats,
                     'qty' => $qty,
-                    'note' => $req->note
+                    'note' => $req->note,
+                    'created_at' => date('Y-m-d H:i:s')
                 ]);
             }
         }

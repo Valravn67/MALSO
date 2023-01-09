@@ -42,7 +42,7 @@
       <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #850000">
         <!-- Brand Logo -->
         <div class="brand-link">
-          <img src="/dist/img/malso.png" alt="telkomakses-logo" class="brand-text" style="width: 234px "/>
+          <img src="/dist/img/malsow.png" alt="telkomakses-logo" class="brand-text" style="width: 234px "/>
           {{-- <span class="brand-text font-weight-light" style="color: azure">.</span> --}}
         </div>
 

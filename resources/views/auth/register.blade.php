@@ -19,7 +19,7 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition register-page" style="background-image: url(/dist/img/bg.png); background-size: 100%; background-position: bottom">
+<body class="hold-transition register-page" style="background-image: url(/dist/img/bg.png); background-size: 100%; background-position: bottom; background-repeat: no-repeat">
 <div class="register-box">
   <div class="register-logo">
     <img src="/dist/img/malso_r.png" alt="telkomakses-logo" style="width: 334px; " >

@@ -41,86 +41,86 @@ class LogisticsModel extends Model
         ->join('gudang AS g', 'om.id_warehouse', '=', 'g.id_warehouse')
         ->join('technician AS t', 'om.id_technician', '=', 't.id_technician')
         ->join('stock_materials AS sm', 'om.id_mats', '=', 'sm.id')
-        ->select('g.warehouse_name' , 'sm.designator_type', 'sm.designator', 'om.qty', 't.nik', 't.name')
+        ->select('g.warehouse_name' , 'sm.designator_type', 'sm.designator', 'om.qty', 't.nik', 't.name', 'om.created_at')
         ->where('om.id_warehouse', $id_warehouse)
         ->where('om.id_mats', $id_mats)
         ->get();
     }
 
-    public static function dashboard_material($view, $type)
-    {
-        switch ($view) {
-            case 'stock_materials':
-                switch ($type) {
-                    case 'day':
-                        $days = '';
-                        for ($i = 1; $i < date('t') + 1; $i ++)
-                        {
-                            if ($i < 10)
-                            {
-                                $keys = '0'.$i;
-                            } else {
-                                $keys = $i;
-                            }
-                            $days .= ',SUM(CASE WHEN (DATE(sm.updated_at) = "'.date('Y-m-').''.$keys.'") THEN 1 ELSE 0 END) as sm_day'.$keys.'';
-                        }
-                        return DB::select('
-                            SELECT
-                            g.warehouse_name
-                            '.$days.'
-                            FROM stock_materials sm
-                            LEFT JOIN gudang g ON sm.warehouse_id = g.id_warehouse
-                            GROUP BY g.warehouse_name
-                        ');
-                        break;
-                    case 'month':
-                        $months = ['januari' => '01', 'februari' => '02', 'maret' => '03', 'april' => '04', 'mei' => '05', 'juni' => '06', 'juli' => '07', 'agustus' => '08', 'september' => '09', 'oktober' => '10', 'november' => '11', 'desember' => '12'];
-                        $sums = '';
-                        foreach ($months as $key => $value)
-                        {
-                            $keys = date('Y-').$value;
-                            $sums .= ',SUM(CASE WHEN (DATE(sm.updated_at) LIKE "'.$keys.'%") THEN 1 ELSE 0 END) as '.$key;
-                        }
-                        return DB::select('
-                            SELECT
-                            g.warehouse_name
-                            '.$sums.'
-                            FROM stock_materials sm
-                            LEFT JOIN gudang g ON sm.warehouse_id = g.id_warehouse
-                            GROUP BY g.warehouse_name
-                        ');
-                        break;
-                }
-                break;
-            case 'out_materials':
-                switch ($type) {
-                    case 'day':
+    // public static function dashboard_material($view, $type)
+    // {
+    //     switch ($view) {
+    //         case 'stock_materials':
+    //             switch ($type) {
+    //                 case 'day':
+    //                     $days = '';
+    //                     for ($i = 1; $i < date('t') + 1; $i ++)
+    //                     {
+    //                         if ($i < 10)
+    //                         {
+    //                             $keys = '0'.$i;
+    //                         } else {
+    //                             $keys = $i;
+    //                         }
+    //                         $days .= ',SUM(CASE WHEN (DATE(sm.updated_at) = "'.date('Y-m-').''.$keys.'") THEN 1 ELSE 0 END) as sm_day'.$keys.'';
+    //                     }
+    //                     return DB::select('
+    //                         SELECT
+    //                         g.warehouse_name
+    //                         '.$days.'
+    //                         FROM stock_materials sm
+    //                         LEFT JOIN gudang g ON sm.warehouse_id = g.id_warehouse
+    //                         GROUP BY g.warehouse_name
+    //                     ');
+    //                     break;
+    //                 case 'month':
+    //                     $months = ['januari' => '01', 'februari' => '02', 'maret' => '03', 'april' => '04', 'mei' => '05', 'juni' => '06', 'juli' => '07', 'agustus' => '08', 'september' => '09', 'oktober' => '10', 'november' => '11', 'desember' => '12'];
+    //                     $sums = '';
+    //                     foreach ($months as $key => $value)
+    //                     {
+    //                         $keys = date('Y-').$value;
+    //                         $sums .= ',SUM(CASE WHEN (DATE(sm.updated_at) LIKE "'.$keys.'%") THEN 1 ELSE 0 END) as '.$key;
+    //                     }
+    //                     return DB::select('
+    //                         SELECT
+    //                         g.warehouse_name
+    //                         '.$sums.'
+    //                         FROM stock_materials sm
+    //                         LEFT JOIN gudang g ON sm.warehouse_id = g.id_warehouse
+    //                         GROUP BY g.warehouse_name
+    //                     ');
+    //                     break;
+    //             }
+    //             break;
+    //         case 'out_materials':
+    //             switch ($type) {
+    //                 case 'day':
                         
-                        break;
-                    case 'month':
-                        $days = '';
-                        for ($i = 1; $i < date('t') + 1; $i ++)
-                        {
-                            if ($i < 10)
-                            {
-                                $keys = '0'.$i;
-                            } else {
-                                $keys = $i;
-                            }
-                            $days .= ',SUM(CASE WHEN (DATE(sm.updated_at) = "'.date('Y-m-').''.$keys.'") THEN 1 ELSE 0 END) as sm_day'.$keys.'';
-                        }
-                        return DB::select('
-                            SELECT
-                            g.warehouse_name
-                            '.$days.'
-                            FROM stock_materials sm
-                            LEFT JOIN gudang g ON sm.warehouse_id = g.id_warehouse
-                            GROUP BY g.warehouse_name
-                        ');
-                        break;
-                }
-                break;
-        }
-    }
+    //                     break;
+    //                 case 'month':
+    //                     $days = '';
+    //                     for ($i = 1; $i < date('t') + 1; $i ++)
+    //                     {
+    //                         if ($i < 10)
+    //                         {
+    //                             $keys = '0'.$i;
+    //                         } else {
+    //                             $keys = $i;
+    //                         }
+    //                         $days .= ',SUM(CASE WHEN (DATE(sm.updated_at) = "'.date('Y-m-').''.$keys.'") THEN 1 ELSE 0 END) as sm_day'.$keys.'';
+    //                     }
+    //                     return DB::select('
+    //                         SELECT
+    //                         g.warehouse_name
+    //                         '.$days.'
+    //                         FROM stock_materials sm
+    //                         LEFT JOIN gudang g ON sm.warehouse_id = g.id_warehouse
+    //                         GROUP BY g.warehouse_name
+    //                     ');
+    //                     break;
+    //             }
+    //             break;
+    //     }
+    // }
 
 }

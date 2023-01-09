@@ -26,7 +26,7 @@
         }
 </style>
 </head>
-<body class="hold-transition login-page" style="background-image: url(/dist/img/bg.png); background-size: 100%; background-position: bottom">
+<body class="hold-transition login-page" style="background-image: url(/dist/img/bg.png); background-size: 100%; background-position: bottom; background-repeat: no-repeat">
 <div class="hero">
         <div class="row align-items-center">
             <div class="col-md-6">
